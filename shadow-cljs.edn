@@ -1,0 +1,23 @@
+{:deps   {:aliases [:main :dev]}
+ :nrepl  {:port       8230}
+ :builds {:app {:target     :browser
+                :output-dir "public/js"
+                :asset-path "/js"
+
+                :modules    {:main {:init-fn feca.core/init}}
+
+                :dev        {:compiler-options {:optimizations   :none
+                                                :closure-defines {goog.DEBUG                           true
+                                                                  re-frame.trace/trace-enabled?        true
+                                                                  day8.re-frame.tracing/trace-enabled? true}}}
+
+                :release    {:compiler-options {:optimizations   :advanced
+                                                :closure-defines {goog.DEBUG                           false
+                                                                  re-frame.trace/trace-enabled?        false
+                                                                  day8.re-frame.tracing/trace-enabled? false}}
+
+                             :build-options    {:manifest-name "assets.edn"}}
+
+                :devtools   {:http-root "public"
+                             :http-port 8101
+                             :preloads  [day8.re-frame-10x.preload]}}}}
