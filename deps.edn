@@ -1,27 +1,24 @@
-{:paths ["src" "public"]
- :deps {org.clojure/clojurescript {:mvn/version "1.10.520"}}
- :aliases {:main     {:extra-deps {reagent                      {:mvn/version "0.10.0"}
-                                   re-frame                     {:mvn/version "0.12.0"}
-                                   day8.re-frame/http-fx        {:mvn/version "0.1.6"}
-                                   cljs-ajax                    {:mvn/version "0.8.0"}
-                                   cljs-http                    {:mvn/version "0.1.46"}
-                                   com.andrewmcveigh/cljs-time  {:mvn/version "0.5.2"}
-                                   bidi                         {:mvn/version "2.1.6"}
-                                   kibu/pushy                   {:mvn/version "0.3.8"}}}
+{:paths   ["src" "public"]
+ :deps    {org.clojure/clojurescript {:mvn/version "1.10.773"}}
+ :aliases {:main     {:extra-deps {reagent                     {:mvn/version "0.10.0"}
+                                   re-frame                    {:mvn/version "1.1.1"}
+                                   day8.re-frame/http-fx       {:mvn/version "0.2.1"}
+                                   cljs-ajax                   {:mvn/version "0.8.1"}
+                                   com.andrewmcveigh/cljs-time {:mvn/version "0.5.2"}}}
 
            :dev      {:extra-deps {binaryage/devtools         {:mvn/version "1.0.2"}
-                                   nrepl/nrepl                {:mvn/version "0.7.0"}
-                                   binaryage/dirac            {:mvn/version "1.6.0"}
-                                   thheller/shadow-cljs       {:mvn/version "2.10.13"}
-                                   day8.re-frame/tracing      {:mvn/version "0.5.6"}
-                                   day8.re-frame/re-frame-10x {:mvn/version "0.6.6"}
-                                   codox                      {:mvn/version "0.10.7"}}}
+                                   nrepl/nrepl                {:mvn/version "0.8.2"}
+                                   binaryage/dirac            {:mvn/version "1.6.1"}
+                                   thheller/shadow-cljs       {:mvn/version "2.11.5"}
+                                   day8.re-frame/tracing      {:mvn/version "0.6.0"}
+                                   day8.re-frame/re-frame-10x {:mvn/version "0.7.0"}}}
 
-           ;; - see https://github.com/Olical/depot
-           :outdated {:extra-deps {olical/depot {:mvn/version "2.0.1"}}
-                      :main-opts  ["-m" "depot.outdated.main"]}
+           ;; - see https://github.com/liquidz/antq
+           :outdated {:extra-deps {antq/antq           {:mvn/version "0.7.5"}
+                                   org.slf4j/slf4j-nop {:mvn/version "2.0.0-alpha1"}}
+                      :main-opts  ["-m" "antq.core"]}
 
            ;; - run code check
-           :lint     {:extra-deps {clj-kondo {:mvn/version "2020.06.21"}}
+           :lint     {:extra-deps {clj-kondo {:mvn/version "2020.10.10"}}
                       :main-opts  ["-m" "clj-kondo.main" "--lint"]}}}
 

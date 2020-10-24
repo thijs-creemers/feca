@@ -3,7 +3,7 @@
   "version": "0.1",
   "description": "Frontend coding assignment",
   "license": "UNLICENSED",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/thijs-creemers/feca.git"
@@ -13,12 +13,12 @@
     "release": "shadow-cljs release app --debug",
     "server": "shadow-cljs server",
     "docs": "shadow-cljs clj-run docs/build && cp docs/default.css docs/build/css/default.css",
-    "css": "cp node_modules/normalize.css/normalize.css ./public/css/normalize.css && cp -pr node_modules/@kpn-style/bundle/base/ui-icon public/css/ui-icon && cp -pr node_modules/@kpn-style/bundle/base/typography public/css/typography && sassc ./style/kpn_theme.scss > ./public/css/kpn_theme.css",
-    "clean": "rm -rf ~/.clojure && rm -rf ~/.m2 && rm -rf node_modules && rm -rf public/js && rm -f public/css/*.css && rm -rf public/css/ui-icon && rm -rf public/css/typography && scripts/generate_maven_config.sh && yarn install && yarn css",
+    "css": "cp node_modules/normalize.css/normalize.css ./public/css/normalize.css && cp node_modules/semantic-ui-css/semantic.min.css public/css/semantic.min.css",
+    "clean": "rm -rf ~/.clojure && rm -rf ~/.m2 && rm -rf node_modules && rm -rf public/js && rm -f public/css/*.css && scripts/generate_maven_config.sh && yarn install && yarn css",
     "compile": "scripts/generate_maven_config.sh && yarn css && yarn release",
     "lint-cli": "scripts/generate_maven_config.sh && yarn lint",
     "lint": "clojure -A:lint src",
-    "update": "clj -A:outdated --update"
+    "outdated": "clj -A:outdated"
   },
   "dependencies": {
     "create-react-class": "^15.6.3",

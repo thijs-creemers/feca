@@ -1,5 +1,12 @@
 *.iml
 .idea/
+.clj-kondo/
+.cpcache/
+.shadow-cljs.
 lsp/
 node_modules
 yarn.lock
+public/css
+.shadow-cljs
+public/js
+trace.edn
