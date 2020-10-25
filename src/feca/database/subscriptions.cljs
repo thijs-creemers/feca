@@ -13,10 +13,14 @@
     [db [_ data-path]]
     (get-in db (vec (cons :data data-path)))))
 
-
-;;; Layer-2 :meta subscription
 (re-frame/reg-sub
-  :meta
+  :related-data
+  (fn
+    [db [_ data-path]]
+    (get-in db (vec (cons :data data-path)))))
+
+(re-frame/reg-sub
+  :sort-info
   (fn
     [db [_ data-path]]
     (get-in db (vec (cons :meta data-path)))))

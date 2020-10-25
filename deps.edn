@@ -1,10 +1,13 @@
 {:paths   ["src" "public"]
+
  :deps    {org.clojure/clojurescript {:mvn/version "1.10.773"}}
+
  :aliases {:main     {:extra-deps {reagent                     {:mvn/version "0.10.0"}
                                    re-frame                    {:mvn/version "1.1.1"}
                                    day8.re-frame/http-fx       {:mvn/version "0.2.1"}
                                    cljs-ajax                   {:mvn/version "0.8.1"}
-                                   com.andrewmcveigh/cljs-time {:mvn/version "0.5.2"}}}
+                                   com.andrewmcveigh/cljs-time {:mvn/version "0.5.2"}
+                                   clj-commons/secretary       {:mvn/version "1.2.4"}}}
 
            :dev      {:extra-deps {binaryage/devtools         {:mvn/version "1.0.2"}
                                    nrepl/nrepl                {:mvn/version "0.8.2"}
@@ -20,5 +23,4 @@
 
            ;; - run code check
            :lint     {:extra-deps {clj-kondo {:mvn/version "2020.10.10"}}
-                      :main-opts  ["-m" "clj-kondo.main" "--lint"]}}}
-
+                      :main-opts  ["-m" "clj-kondo.main" "--parallel --lint"]}}}
