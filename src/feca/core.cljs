@@ -29,13 +29,19 @@
 
   [:thead
    [:tr
-    [:th {:on-click #(sort-column :name)} (column-title :name "Name")]
-    [:th {:on-click #(sort-column :createdAt)} (column-title :createdAt "Creation date")]
-    [:th {:on-click #(sort-column :campaign-count) :style {:text-align "center"}}
+    [:th {:on-click #(sort-column :name)
+          :style {:cursor "pointer"}} (column-title :name "Name")]
+    [:th {:on-click #(sort-column :createdAt)
+          :style {:cursor "pointer"}} (column-title :createdAt "Creation date")]
+    [:th {:on-click #(sort-column :campaign-count)
+          :style {:text-align "center" :cursor "pointer"}}
      (column-title :campaign-count "# of campaigns")]
-    [:th {:on-click #(sort-column :impressions) :style {:text-align "right"}}
+    [:th {:on-click #(sort-column :impressions)
+          :style {:text-align "right" :cursor "pointer"}}
      (column-title :impressions "Impressions")]
-    [:th {:on-click #(sort-column :clicks) :style {:text-align "right"}} (column-title :clicks "Clicks")]]])
+    [:th {:on-click #(sort-column :clicks)
+          :style {:text-align "right"
+                  :cursor "pointer"}} (column-title :clicks "Clicks")]]])
 
 (defn advertiser-row [{:keys [id name createdAt campaign-count impressions clicks]}]
   [:tr {:key (str "advertiser" id)}
