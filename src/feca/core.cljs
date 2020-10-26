@@ -5,18 +5,24 @@
             [feca.database.subscriptions]
             [cljs-time.coerce :as ctime]
             [cljs-time.format :as ftime]
-            [secretary.core :as secretary :refer-macros [defroute]]))
+            [secretary.core :as secretary :refer-macros [defroute]]
+            [pushy.core :as pushy]))
 
+(secretary/set-config! :prefix "#")
 (declare advertiser-view)
 
 (defn format-date [s]
+  "Simple date formating function to display a human readable date."
   (ftime/unparse (ftime/formatter "dd-MM-y") (ctime/from-string s)))
 
 (defn sort-column [key]
+  "Sort the table by the column mentioned in `key"
   (re-frame/dispatch [:meta-data [:advertisers] key])
   [advertiser-view key])
 
-(defn column-title [key title]
+(defn column-title
+  "set the column title."
+  [key title]
   (let [{:keys [order-by direction]} @(re-frame/subscribe [:sort-info [:advertisers]])]
     (if (= key order-by)
       (cond
@@ -25,8 +31,9 @@
         (= direction :unsort) title)
       title)))
 
-(defn advertiser-head []
-
+(defn advertiser-head
+  "Render the advertisers table hader."
+  []
   [:thead
    [:tr
     [:th {:on-click #(sort-column :name)
@@ -43,7 +50,9 @@
           :style {:text-align "right"
                   :cursor "pointer"}} (column-title :clicks "Clicks")]]])
 
-(defn advertiser-row [{:keys [id name createdAt campaign-count impressions clicks]}]
+(defn advertiser-row
+  "Render a table row for advertisers."
+  [{:keys [id name createdAt campaign-count impressions clicks]}]
   [:tr {:key (str "advertiser" id)}
    [:td name]
    [:td (if-not (= id "0") (format-date createdAt) "")]
@@ -52,6 +61,7 @@
    [:td {:style {:text-align "right"}} (if-not (= 0 clicks) clicks "n/a")]])
 
 (defn advertiser-table
+  "Render the advertisers table."
   [advertisers]
   [:div
    [:h1.ui.header "Overview of advertisers"]
@@ -60,6 +70,9 @@
     [:tbody
      (doall (for [advertiser advertisers]
               (advertiser-row advertiser)))]]])
+
+(def history (pushy/pushy secretary/dispatch!
+                          (fn [x] (when secretary/locate-route x) x)))
 
 (defn advertiser-view
   "Display a table with advertisers"
@@ -75,23 +88,27 @@
                                      :impressions (get stats :impressions 0)
                                      :clicks (get stats :clicks 0)))))
                       @(re-frame/subscribe [:data [:advertisers]]))]
+    (pushy/replace-token! history (str "/?order-by=" order-by "&direction="direction))
     [:div.ui.container
      [advertiser-table (cond
                          (= (keyword direction) :asc) (sort-by (keyword order-by) advertisers)
                          (= (keyword direction) :desc) (reverse (sort-by (keyword order-by) advertisers))
                          (= (keyword direction) :unsort) advertisers)]]))
 
-
-(defn routes []
-  (secretary/set-config! :prefix "#")
-
+(defn routes
+  "The routes in this app."
+  []
   (defroute "/" [query-params]
-            (let [order-by (get query-params :order-by :name)
-                  direction (get query-params :direction :unsort)]
-              (re-frame/dispatch [:meta-data [:advertisers] order-by direction])
-              [advertiser-view])))
+            #_(if query-params
+                (let [order-by (get query-params :order-by :name)
+                      direction (get query-params :direction :unsort)]
+                  (re-frame/dispatch [:meta-data [:advertisers] order-by direction])
+                  [advertiser-view]))
+            [advertiser-view]))
 
-(defn app []
+(defn app
+  "Dispatch the page withe the entered URL"
+  []
   (secretary/dispatch! (str (-> js/window .-location .-pathname) (-> js/window .-location .-search))))
 
 
@@ -110,4 +127,5 @@
   []
   (re-frame/dispatch-sync [:initialise-db])                 ; `dispatch-sync` to ensure db is initialised before the app is started.
   (routes)
+  (pushy/start! history)
   (start))

@@ -7,7 +7,8 @@
                                    day8.re-frame/http-fx       {:mvn/version "0.2.1"}
                                    cljs-ajax                   {:mvn/version "0.8.1"}
                                    com.andrewmcveigh/cljs-time {:mvn/version "0.5.2"}
-                                   clj-commons/secretary       {:mvn/version "1.2.4"}}}
+                                   clj-commons/secretary       {:mvn/version "1.2.4"}
+                                   kibu/pushy                  {:mvn/version "0.3.8"}}}
 
            :dev      {:extra-deps {binaryage/devtools         {:mvn/version "1.0.2"}
                                    nrepl/nrepl                {:mvn/version "0.8.2"}
