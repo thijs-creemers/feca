@@ -1,6 +1,6 @@
 # FE coding assignment
 
-###Prerequisites
+##Prerequisites
 ```bash
 brew install clojure yarn  # installs the clojure and yarn packages
 yarn install               # installs all npm dependencies
