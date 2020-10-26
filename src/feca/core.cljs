@@ -11,12 +11,14 @@
 (secretary/set-config! :prefix "#")
 (declare advertiser-view)
 
-(defn format-date [s]
+(defn format-date
   "Simple date formating function to display a human readable date."
+  [s]
   (ftime/unparse (ftime/formatter "dd-MM-y") (ctime/from-string s)))
 
-(defn sort-column [key]
+(defn sort-column
   "Sort the table by the column mentioned in `key"
+  [key]
   (re-frame/dispatch [:meta-data [:advertisers] key])
   [advertiser-view key])
 
