@@ -16,5 +16,5 @@ git clone git@github.com:thijs-creemers/feca.git
 yarn dev
 ```
 Wait a few moments for the compilation to complete and go the your browser and open 
-'http://127.0.0.1:8101'. 
+the app with the url: 'http://127.0.0.1:8101'. 
 
