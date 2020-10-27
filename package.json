@@ -13,7 +13,7 @@
     "release": "shadow-cljs release app --debug",
     "server": "shadow-cljs server",
     "docs": "shadow-cljs clj-run docs/build && cp docs/default.css docs/build/css/default.css",
-    "css": "cp node_modules/normalize.css/normalize.css ./public/css/normalize.css && cp node_modules/semantic-ui-css/semantic.min.css public/css/semantic.min.css",
+    "css": "cp node_modules/normalize.css/normalize.css public/css/normalize.css && cp node_modules/semantic-ui-css/semantic.min.css public/css/semantic.min.css",
     "clean": "rm -rf ~/.clojure && rm -rf ~/.m2 && rm -rf node_modules && rm -rf public/js && rm -f public/css/*.css && scripts/generate_maven_config.sh && yarn install && yarn css",
     "compile": "scripts/generate_maven_config.sh && yarn css && yarn release",
     "lint-cli": "scripts/generate_maven_config.sh && yarn lint",
